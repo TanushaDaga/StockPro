@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockPro</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-chart-line"></i> STOCKPRO
+            </div>
+
+            <div class="control-group">
+                <label>Select Sector</label>
+                <select id="sectorSelect">
+                    <option value="Custom">Custom Selection</option>
+                    </select>
+            </div>
+
+            <div class="control-group">
+                <label>Search Stock</label>
+                <div class="input-row">
+                    <input type="text" id="tickerInput" placeholder="Apple, Tesla...">
+                    <button id="addBtn"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+
+            <div class="watchlist-container">
+                <h3>Watchlist</h3>
+                <ul id="watchlist"></ul>
+                <button id="clearBtn" class="outline-btn">Clear All</button>
+            </div>
+
+            <div class="control-group">
+                <label>Date Range</label>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div>
+                        <label style="font-size: 0.75rem; margin-bottom:2px;">Start Date</label>
+                        <input type="date" id="startDate">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.75rem; margin-bottom:2px;">End Date</label>
+                        <input type="date" id="endDate">
+                    </div>
+                </div>
+            </div>
+
+            <button id="analyzeBtn" class="primary-btn">ANALYZE STOCKS</button>
+
+            
+        </aside>
+
+        <main class="main-content">
+            <header style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h2>Dashboard Overview</h2>
+                    <div class="status" id="statusMsg">Ready</div>
+                </div>
+                
+                <button id="themeToggle" style="background:none; border:none; font-size: 1.5rem; cursor: pointer; color: var(--text-primary); padding: 10px;">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+            </header>
+
+            <section class="card">
+                <h3><i class="fa-solid fa-table"></i> Financial Metrics</h3>
+                <div class="table-wrapper">
+                    <table id="metricsTable">
+                        <thead>
+                            <tr>
+                                <th>Ticker</th>
+                                <th>Total Return</th>
+                                <th>Ann. Volatility</th>
+                                <th>Sharpe Ratio</th>
+                                <th>Max Drawdown</th>
+                                <th>Start Price</th>
+                                <th>End Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <div class="charts-grid">
+                <section class="card">
+                    <h3><i class="fa-solid fa-money-bill-trend-up"></i> Price History</h3>
+                    <div id="priceChart"></div>
+                </section>
+                
+                <section class="card">
+                    <h3><i class="fa-solid fa-chart-simple"></i> Volume Analysis</h3>
+                    <div id="volumeChart"></div>
+                </section>
+
+                <section class="card">
+                    <h3><i class="fa-solid fa-fire"></i> Correlation Heatmap</h3>
+                    <div id="heatmapChart"></div>
+                </section>
+                
+                <section class="card ai-card">
+                    <h3><i class="fa-solid fa-robot"></i> AI Analyst</h3>
+                    <div class="chat-interface">
+                        <div id="aiResponse" class="ai-output" style="height: 300px;">AI insights will appear here...</div>
+                        <div class="input-row">
+                            <input type="text" id="aiPrompt" placeholder="Ask about the data...">
+                            <button id="askAiBtn"><i class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card" style="grid-column: span 2;">
+                    <h3><i class="fa-regular fa-newspaper"></i> Latest Market News</h3>
+                    <div id="newsContainer" class="news-grid">
+                        <div style="color: #888; font-style: italic;">Run analysis to see news...</div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

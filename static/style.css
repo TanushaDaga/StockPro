@@ -1,0 +1,250 @@
+:root {
+    --bg-dark: #0f1115;
+    --sidebar-bg: #161b22;
+    --card-bg: #1e232e;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --accent-color: #2f81f7;
+    --accent-hover: #58a6ff;
+    --border-color: #30363d;
+    --success: #238636;
+    --danger: #da3633;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden; /* Prevent body scroll, use grid */
+}
+
+/* Layout */
+.container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.logo { font-size: 1.2rem; font-weight: bold; color: var(--accent-color); margin-bottom: 10px; }
+
+.control-group label { display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 5px; }
+input, select {
+    width: 100%;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 8px;
+    border-radius: 6px;
+}
+input:focus, select:focus { outline: 1px solid var(--accent-color); border-color: var(--accent-color); }
+
+.input-row { display: flex; gap: 5px; }
+
+/* Buttons */
+button { cursor: pointer; border: none; border-radius: 6px; padding: 8px; font-weight: 600; transition: 0.2s; }
+.primary-btn { background: var(--accent-color); color: white; width: 100%; padding: 12px; margin-top: 10px; }
+.primary-btn:hover { background: var(--accent-hover); }
+.outline-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-secondary); width: 100%; font-size: 0.8rem; }
+#addBtn, #askAiBtn { background: var(--success); color: white; width: 40px; }
+#addBtn:hover { background: #2ea043; }
+
+/* Watchlist */
+#watchlist { list-style: none; min-height: 50px; border: 1px solid var(--border-color); border-radius: 6px; padding: 5px; }
+#watchlist li { padding: 5px 10px; display: flex; justify-content: space-between; font-size: 0.9rem; border-bottom: 1px solid #30363d55; }
+#watchlist li:last-child { border-bottom: none; }
+.remove-btn { color: var(--danger); cursor: pointer; }
+
+/* Main Content */
+.main-content {
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+header { display: flex; justify-content: space-between; align-items: center; }
+.status { font-size: 0.8rem; color: var(--text-secondary); }
+
+/* Cards */
+.card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; }
+.card h3 { font-size: 1rem; color: var(--text-secondary); margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+
+/* Table */
+.table-wrapper { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th { text-align: left; color: var(--text-secondary); padding: 10px; border-bottom: 1px solid var(--border-color); }
+td { padding: 10px; border-bottom: 1px solid #30363d55; }
+tr:hover { background: #ffffff05; }
+
+/* Charts Grid */
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+#heatmapChart, #priceChart { grid-column: span 2; min-height: 400px; }
+#volumeChart { min-height: 300px; }
+.ai-card { min-height: 300px; }
+
+/* AI Chat */
+.ai-output { background: var(--bg-dark); padding: 10px; border-radius: 6px; height: 150px; overflow-y: auto; margin-bottom: 10px; font-size: 0.9rem; line-height: 1.4; border: 1px solid var(--border-color); }
+
+
+
+/* News Grid Layout */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Individual News Card */
+.news-card {
+    display: flex;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.news-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+}
+
+.news-img {
+    width: 80px;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.news-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.news-meta {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.news-ticker {
+    background: #238636;
+    color: white;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 0.7rem;
+}
+
+.news-title {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.news-title:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* GLOBAL SCROLLBAR (Applies to EVERYTHING)
+  
+
+/* 1. Force all elements to use this style */
+* {
+    /* Firefox Support */
+    scrollbar-width: thin;
+    scrollbar-color: #30363d transparent;
+}
+
+/* 2. Webkit (Chrome, Edge, Safari) - The Main Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;    /* Vertical width */
+    height: 6px;   /* Horizontal height */
+}
+
+/* 3. The Track (Background) - Transparent */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* 4. The Thumb (Moving Part) - Dark Grey */
+::-webkit-scrollbar-thumb {
+    background-color: #30363d;
+    border-radius: 10px;       /* Fully rounded */
+    border: 1px solid transparent; /* Creates a tiny padding effect */
+    background-clip: content-box;
+}
+
+/* 5. The Thumb on Hover - Blue */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #58a6ff;
+}
+
+/* 6. The Corner (where X and Y bars meet) */
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+:root {
+    /* DEFAULT (DARK MODE) */
+    --bg-dark: #090b10;
+    --sidebar-bg: #111418;
+    --card-bg: rgba(30, 35, 46, 0.6);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --accent-color: #3a7bd5;
+    --input-bg: #0d1117; 
+}
+
+/* LIGHT MODE COLORS */
+[data-theme="light"] {
+    --bg-dark: #f0f2f5;          /* Light Grey Background */
+    --sidebar-bg: #ffffff;       /* White Sidebar */
+    --card-bg: #ffffff;          /* White Cards */
+    --text-primary: #1a202c;     /* Dark Black Text */
+    --text-secondary: #4a5568;   /* Dark Grey Text */
+    --border-color: #e2e8f0;     /* Light Border */
+    --accent-color: #2563eb;     /* Blue */
+    --input-bg: #ffffff;         /* White Inputs */
+}
+
+/* Apply the variables to the body */
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    transition: background-color 0.3s, color 0.3s; /* Smooth fade effect */
+}
+
+/* Fix Inputs/Selects for Light Mode */
+input, select {
+    background-color: var(--input-bg) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+}
